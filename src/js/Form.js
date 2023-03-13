@@ -1,9 +1,8 @@
-import Render from "./RenderItem";
 import Comment from "./Comment";
 
-class Form {
-  constructor() {
-    this.cache = Storage.cache;
+class Form{
+  constructor(cache) {
+    this.cache = cache;
     this.listenerForm();
   }
 
@@ -25,18 +24,14 @@ class Form {
     if (this.validInputData(name)) return;
     if (this.validInputData(comment)) return;
 
-    let date = form.querySelector(".input__date").value;
-    date = new Date(
-      `${date
-        .split(".")
-        .reverse()
-        .join("-")} ${new Date().toLocaleTimeString()}`
-    );
+    date =
+      date.value && new Date(date.value) <= new Date()
+        ? new Date(`${date.value} ${new Date().toLocaleTimeString()}`)
+        : new Date();
 
     this.cache.push(new Comment(name.value.trim(), comment.value.trim(), date));
 
-    const render = new Render(this.cache);
-    render.addItem();
+    this.addItem();
     form.reset();
   }
 
@@ -62,7 +57,7 @@ class Form {
   }
 
   showWarning(elem, text) {
-    document.querySelector(".warning").remove();
+    document.querySelector(".warning")?.remove();
     const warning = document.createElement("div");
     warning.className = "warning";
     warning.innerHTML = `<span>${text}</span>`;

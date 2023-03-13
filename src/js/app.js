@@ -1,16 +1,12 @@
-import addOption from "./addOption";
 import Comment from "./Comment";
-import Form from "./Form";
 import RenderItem from "./RenderItem";
-
-addOption(document.querySelector(".input__date"));
 
 const cache = [];
 cache.push(
   new Comment(
     "Витя",
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat sequi placeat dolorem aut obcaecati animi praesentium error accusamus nihil quas, voluptatem illo voluptatibus eligendi ea adipisci nobis, nostrum culpa nisi. Placeat asperiores, quod ullam quae provident repellendus sit cum earum necessitatibus, voluptate corporis aut.",
-    new Date("2023-03-07 03:15"),
+    new Date("2023-02-07 03:15"),
     true
   )
 );
@@ -29,7 +25,4 @@ cache.push(
   )
 );
 
-const renderItem = new RenderItem(cache);
-renderItem.addItem();
-
-new Form(cache);
+new RenderItem(cache);

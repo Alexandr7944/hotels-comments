@@ -1,12 +1,15 @@
-class RenderItem {
+import Form from "./Form";
+
+class RenderItem extends Form {
   constructor(cache) {
-    this.cache = cache;
+    super(cache);
+    this.addItem();
   }
 
   addItem() {
     const output = document.querySelector(".output");
     while (output.firstChild) output.firstChild.remove();
-    this.filterCache();
+    this.cache.sort((a, b) => a.date - b.date);
     this.cache.forEach((item) => {
       let date = this.calcDay(item.date);
       const time = item.date.toLocaleTimeString([], {
@@ -59,6 +62,11 @@ class RenderItem {
     });
   }
 
+  // static addCommit(name, comment, date) {
+  //   this.cache.push(new Comment(name.value.trim(), comment.value.trim(), date));
+  //   this.addItem();
+  // }
+
   calcDay(date) {
     const dateComment = date.toLocaleDateString();
     const today = new Date().toLocaleDateString();
@@ -69,10 +77,6 @@ class RenderItem {
       return "Вчера";
     }
     return dateComment;
-  }
-
-  filterCache() {
-    this.cache.sort((a, b) => a.date - b.date);
   }
 }
 
