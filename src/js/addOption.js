@@ -4,6 +4,7 @@ function addOption(element) {
     const valueDate = new Date(
       dateNow - 24 * 60 * 60 * 1000 * i
     ).toLocaleDateString();
+
     element.insertAdjacentHTML(
       "beforeend",
       `

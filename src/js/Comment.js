@@ -1,6 +1,6 @@
 class Comment {
   constructor(name, comment, date, like = false) {
-    this.name = name;
+    this.name = name[0].toUpperCase() + name.slice(1);
     this.comment = comment;
     this.date = date;
     this.like = like;

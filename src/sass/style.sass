@@ -7,7 +7,8 @@
     outline: 3px solid $titleColor
   
 
-$titleColor: #0d6dfda9
+$titleColor: rgba(13, 109, 253, 0.663)
+$btnColor: #44885e
 
 html
   font-size: 10px
@@ -36,8 +37,30 @@ html
   flex-direction: column
   justify-content: flex-start
 
+.warning
+  position: absolute
+  padding: 10px
+  top: 80px
+  background-color: #eec6c6
+  border: 2px solid rgb(218, 68, 68)
+  border-radius: 15px
+  font-size: 18px
+  z-index: 10
+  animation: modal .5s linear 1 normal
+
+.warning-out
+  animation: modal .5s linear 1 reverse
+
+@keyframes modal
+  0%
+    transform: translateX(-500px)
+    opacity: 0.3
+  100%
+    opacity: 1
+
 .label
   margin-bottom: 15px
+  position: relative
   &:last-child
     margin-bottom: 0
 
@@ -76,7 +99,7 @@ html
   letter-spacing: 2px
   text-transform: uppercase
   color: #fff
-  background-color: #6aac83b4
+  background-color: #44885e
   border-radius: 10px
   font-size: 1.2em
   cursor: pointer
@@ -85,8 +108,6 @@ html
 .title
   color: #f8f9fa
   font-size: 2em
-
-.output 
 
 .output__row
   margin-bottom: 15px
@@ -119,12 +140,19 @@ html
 
 .output__btn 
   background-color: #dee2e6
-  padding: 15px
+  padding: 15px 30px
+  display: flex
+  justify-content: space-between
 
-.output__remove 
-  padding: 15px
-  background-color: #6aac83b4
-  border-radius: 10px
-  font-size: 1.3em
-  cursor: pointer
-  color: #fff
+.output__like,
+.output__remove
+  width: 30px
+  height: 30px
+  background-color: transparent
+  background-size: contain
+  fill: none
+  stroke: $titleColor
+
+
+.output__like_active
+  fill: $titleColor

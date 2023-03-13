@@ -26,11 +26,19 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.(sass|scss|css)$/,
         use: [
-          MiniCssExtractPlugin.loader, 'css-loader',
-        ],
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'],
       },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     MiniCssExtractPlugin.loader, 'css-loader',
+      //   ],
+      // },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
