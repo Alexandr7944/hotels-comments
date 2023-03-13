@@ -2,8 +2,8 @@ import Render from "./RenderItem";
 import Comment from "./Comment";
 
 class Form {
-  constructor(cache) {
-    this.cache = cache;
+  constructor() {
+    this.cache = Storage.cache;
     this.listenerForm();
   }
 
@@ -17,10 +17,10 @@ class Form {
 
   formSubmit(e) {
     e.preventDefault();
-
     const form = document.forms[0];
     const comment = form.querySelector(".input__comment");
     const name = form.querySelector(".input__name");
+    let date = form.querySelector(".input__date");
 
     if (this.validInputData(name)) return;
     if (this.validInputData(comment)) return;
@@ -40,32 +40,34 @@ class Form {
     form.reset();
   }
 
+  validInputData(row) {
+    if (row.classList.contains("input__name")) {
+      if (!row.value.trim()) {
+        this.showWarning(row, "Введите имя");
+        return true;
+      }
+      if (/^[0-9]/.test(row.value.trim())) {
+        this.showWarning(row, "Имя не может начинаться с цифры");
+        return true;
+      }
+      if (!/^[а-яa-z]/i.test(row.value.trim())) {
+        this.showWarning(row, "Имя не может начинаться с знака");
+        return true;
+      }
+    } else if (row.classList.contains("input__comment") && !row.value.trim()) {
+      this.showWarning(row, "Оставьте комментарий");
+      return true;
+    }
+    return false;
+  }
+
   showWarning(elem, text) {
-    document.querySelector(".warning")?.remove();
+    document.querySelector(".warning").remove();
     const warning = document.createElement("div");
     warning.className = "warning";
     warning.innerHTML = `<span>${text}</span>`;
     elem.parentElement.append(warning);
     elem.addEventListener("input", () => warning.remove(), { once: true });
-  }
-
-  validInputData(row) {
-    if (row.classList.contains("input__name") && !row.value.trim()) {
-      this.showWarning(row, "Введите имя");
-      return true;
-    }
-    if (
-      row.classList.contains("input__name") &&
-      /^[0-9]/.test(row.value.trim())
-    ) {
-      this.showWarning(row, "Имя не может начинаться с цифры");
-      return true;
-    }
-    if (row.classList.contains("input__comment") && !row.value.trim()) {
-      this.showWarning(row, "Оставьте комментарий");
-      return true;
-    }
-    return false;
   }
 }
 
