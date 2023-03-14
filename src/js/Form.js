@@ -1,6 +1,6 @@
 import Comment from "./Comment";
 
-class Form{
+class Form {
   constructor(cache) {
     this.cache = cache;
     this.listenerForm();
@@ -57,11 +57,14 @@ class Form{
   }
 
   showWarning(elem, text) {
-    document.querySelector(".warning")?.remove();
+    if (document.querySelector(".warning")) {
+      document.querySelector(".warning").remove();
+    }
     const warning = document.createElement("div");
     warning.className = "warning";
     warning.innerHTML = `<span>${text}</span>`;
     elem.parentElement.append(warning);
+    warning.style.top = elem.offsetTop + elem.offsetHeight + 5 + "px";
     elem.addEventListener("input", () => warning.remove(), { once: true });
   }
 }
