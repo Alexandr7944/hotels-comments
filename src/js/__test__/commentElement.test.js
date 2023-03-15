@@ -17,5 +17,6 @@ test("class CommentElement.calcDay(yesterday)", () => {
 
 test("class CommentElement.calcDay(date)", () => {
   const day = new CommentElement().calcDay(new Date("2023-02-07 03:15"));
-  expect(day).toBe("07.02.2023");
+  const result = new Date("2023-02-07 03:15").toLocaleDateString();
+  expect(day).toBe(result);
 });
