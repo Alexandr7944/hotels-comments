@@ -65,7 +65,15 @@ class Form {
     warning.innerHTML = `<span>${text}</span>`;
     elem.parentElement.append(warning);
     warning.style.top = elem.offsetTop + elem.offsetHeight + 5 + "px";
-    elem.addEventListener("input", () => warning.remove(), { once: true });
+    elem.addEventListener(
+      "input",
+      () => {
+        warning.style.opacity = 0;
+        warning.style.transition = "0.3s";
+        setTimeout(() => warning.remove(), 300);
+      },
+      { once: true }
+    );
   }
 }
 
